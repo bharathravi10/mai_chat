@@ -1,5 +1,3 @@
-# 📄 EXPLANATION.md
-
 # **Real-Time Chat Application**
 
 This document explains the design choices, challenges faced, solutions implemented, and future improvements for the real-time chat application built using **Next.js (frontend)** and **Express.js with WebSocket (backend).**
