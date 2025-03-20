@@ -4,7 +4,7 @@ This document explains the design choices, challenges faced, solutions implement
 
 ---
 
-## ✅ **Design Choices**
+## **Design Choices**
 
 ### 1. **Component-Based Structure**
 
@@ -35,7 +35,7 @@ This document explains the design choices, challenges faced, solutions implement
 
 ---
 
-## 🏆 **Challenges and Solutions**
+## **Challenges and Solutions**
 
 ### 1. **Preventing Empty Messages**
 
@@ -88,7 +88,7 @@ Browser `alert()` was disrupting the user experience.
 
 ---
 
-## 🚀 **Future Improvements**
+## **Future Improvements**
 
 ### 1. **Message Delivery Status**
 
@@ -126,6 +126,6 @@ Browser `alert()` was disrupting the user experience.
 
 ---
 
-## 📌 **Conclusion**
+## **Conclusion**
 
 The real-time chat application is now functional with core features like real-time messaging, typing notifications, and connection management. The current implementation is scalable and easy to extend with future improvements like message status, file sharing, and encryption.
