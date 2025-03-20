@@ -20,7 +20,7 @@ export default function Chat() {
   const socketRef = useRef<WebSocket | null>(null);
   const [notification, setNotification] = useState<string | null>(null);
 
-  // ✅ Capitalize name and message when setting state
+  // Capitalize name and message when setting state
   const capitalize = (text: string) =>
     text
       .split(" ")
@@ -35,7 +35,7 @@ export default function Chat() {
     };
   }, []);
 
-  // ✅ Reconnect on connection loss
+  //Reconnect on connection loss
   const connectSocket = () => {
     socketRef.current = new WebSocket("ws://localhost:4000");
 
@@ -48,6 +48,11 @@ export default function Chat() {
         const data = JSON.parse(event.data);
         if (data.type === ChatConstants.MESSAGE) {
           setMessages((prev) => [...prev, data]);
+        }
+        //Load chat history from server
+        else if (data.type === "history") {
+          setMessages(data.history);
+          setUsername(data.history[data.history.length - 1].user);
         } else if (data.type === ChatConstants.TYPING) {
           setTyping(data.user);
           setTimeout(() => setTyping(null), 1000);
@@ -60,17 +65,19 @@ export default function Chat() {
     socketRef.current.onclose = () => {
       setConnected(false);
 
-      // ✅ Attempt to reconnect after 2 seconds
+      // Attempt to reconnect after 2 seconds
       setTimeout(() => {
         connectSocket();
       }, 2000);
     };
   };
+
   const notify = (msg: string) => {
     setNotification(msg);
     setTimeout(() => setNotification(null), 3000);
   };
-  // ✅ Prevent sending empty messages or empty names
+
+  // Prevent sending empty messages or empty names
   const sendMessage = () => {
     if (input.trim() === "" || username.trim() === "") {
       notify(ChatConstants.USER_EMPTY);
@@ -102,7 +109,7 @@ export default function Chat() {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100 dark:bg-gray-900">
       <div className="w-full max-w-2xl md:max-w-4xl h-[90vh] bg-white dark:bg-gray-800 shadow-xl rounded-lg overflow-hidden">
-        {/* ✅ Show connection status */}
+        {/*Show connection status */}
         {!connected && (
           <div className="bg-red-500 text-white text-center py-2">
             {ChatConstants.DISCONNECTED}
@@ -127,7 +134,8 @@ export default function Chat() {
           sendMessage={sendMessage}
           handleTyping={handleTyping}
         />
-        {/* ✅ Notification */}
+
+        {/*Notification */}
         {notification && (
           <div className="fixed top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-md shadow-md">
             {notification}
